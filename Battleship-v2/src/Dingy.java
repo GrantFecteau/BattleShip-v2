@@ -1,15 +1,12 @@
 
 public class Dingy extends Ship
 	{
-		private int length;
-		private int health;
-		private int ammo;
-		private String letter;
-		public Dingy(int l, int h, int a)
+	
+		public Dingy()
 		{
-			length = l;
-			health = h;
-			ammo = a;
+			length = 2;
+			health = 1;
+			ammo = 1;
 			letter ="\u1F6A3";
 		}
 

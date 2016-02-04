@@ -2,15 +2,11 @@
 public class Frigate extends Ship
 	{
 		
-		private int length;
-		private int health;
-		private int ammo;
-		private String letter;
-		public Frigate(int l, int h, int a)
+		public Frigate()
 		{
-			length = l;
-			health = h;
-			ammo = a;
+			length = 4;
+			health = 2;
+			ammo = 1;
 			letter ="\u26F5";
 		}
 

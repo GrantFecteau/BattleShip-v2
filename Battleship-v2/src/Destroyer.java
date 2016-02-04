@@ -1,17 +1,14 @@
 
 public class Destroyer extends Ship
 	{
-		private int length;
-		private int health;
-		private int ammo;
-		private String letter;
-		public Destroyer(int l, int h, int a)
+		public Destroyer()
 		{
-			length = l;
-			health = h;
-			ammo = a;
+			length = 5;
+			health = 2;
+			ammo = 1;
 			letter ="\u1F6A2";
 		}
+		
 
 		
 	}

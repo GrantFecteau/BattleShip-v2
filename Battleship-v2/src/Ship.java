@@ -1,19 +1,10 @@
 
 public abstract class Ship
 	{
-		private int length;
-		private int health;
-		private int ammo;
-		private String letter;
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		protected int length;
+		protected int health;
+		protected int ammo;
+		protected String letter;
 		public int getLength()
 			{
 				return length;
@@ -46,5 +37,7 @@ public abstract class Ship
 			{
 				this.letter = letter;
 			}
+		
+		
 
 	}

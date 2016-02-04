@@ -1,15 +1,11 @@
 
 public class Cruiser extends Ship
-	{
-		private int length;
-		private int health;
-		private int ammo;
-		private String letter; 
-		public Cruiser(int l, int h, int a)
+	{ 
+		public Cruiser()
 		{
-			length = l;
-			health = h;
-			ammo = a;
+			length = 3;
+			health = 1;
+			ammo = 0;
 			letter ="\u1F684";
 		}
 
