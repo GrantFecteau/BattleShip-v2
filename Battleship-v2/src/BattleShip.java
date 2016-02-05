@@ -141,8 +141,6 @@ public class BattleShip
 					System.out.println("That's not a valid option, try again.");
 					placeShips();
 				}
-			
-			
 		}
 		
 		
@@ -157,6 +155,24 @@ public class BattleShip
 			int ans = userInput.nextInt();
 			
 			System.out.println("You chose to place the " + ships.get(ans-1).getName() + ".");
+			
+			printBoards();
+			System.out.println("Where would you like to start?");
+			Scanner userInput1 = new Scanner (System.in); 
+			String startP = userInput1.nextLine();
+			if (startP.length() < 2)
+				{
+					System.out.println("Sorry that's not valid, try again!");
+					placeHorizontal();
+				}
+			int column = Integer.parseInt(startP.substring(1)) - 1;
+			int row = convertRow(startP);
+			if (column > 9)
+				{
+					System.out.println("Sorry that's not valid, try again.");
+					placeHorizontal();
+				}
+			
 		}
 		
 		public static void placeVertical()
@@ -164,7 +180,84 @@ public class BattleShip
 			
 		}
 		
+		public static int convertRow(String s)
+		{
+			int row=0;
+			
+			switch (s.substring(0,1))
+			{
+		case "a":
+		case "A":	
+			{
+			row = 0;
+			break;	
+			}
+		case "b":
+		case "B":
+			{
+			row = 1;
+			break;
+			}
+		case "c":
+		case "C":
+			{
+			row = 2;
+			break;
+			}
+		case "d":
+		case "D":
+			{
+			row = 3;
+			break;
+			}
+		case "e":
+		case "E":
+			{
+		    row = 4;
+		    break;
+			}
+		case "f":
+		case "F":
+			{
+			row = 5;
+			break;
+			}
+		case "g":
+		case "G":
+			{
+			row = 6;
+			break;
+			}
+		case "h":
+		case "H":
+			{
+			row = 7;
+			break;
+			}
+		case "i":
+		case "I":
+			{
+			row = 8;
+			break;
+			}
+		case "j":
+		case "J":
+			{
+			row = 9;
+			break;
+			}
+			default:
+			{
+				System.out.println("Sorry that's not valid, try again!");
+				placeShips();
+			}
 		
+		
+		}
+		
+		
+			return row;
+		}
 		
 		
 		public static void run()
