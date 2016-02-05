@@ -1,6 +1,8 @@
 
 public abstract class Ship
 	{
+		protected String name;
+		
 		protected int length;
 		protected int health;
 		protected int ammo;
@@ -37,7 +39,14 @@ public abstract class Ship
 			{
 				this.letter = letter;
 			}
-		
+		public String getName()
+			{
+				return name;
+			}
+		public void setName(String name)
+			{
+				this.name = name;
+			}
 		
 
 	}

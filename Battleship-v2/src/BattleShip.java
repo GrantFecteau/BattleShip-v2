@@ -1,12 +1,17 @@
-
+import java.util.*;
 public class BattleShip
 	{
 		
 		public static String[][] playerShipBoard;
 	
 		public static String[][] playerHitMissBoard;
+		
+		public static ArrayList<Ship> ships = new ArrayList<Ship>();
+		
+		public static ArrayList<Ship> placeShip = ships;
+		
 
-		public static String[][] createShipBoardForCaptain()
+		public static void createShipBoardForCaptain()
 		{
 			playerShipBoard = new String [10][10];
 			
@@ -23,9 +28,6 @@ public class BattleShip
 				}
 					
 			}
-			
-			return playerShipBoard;
-			
 		}
 		
 		public static void printBoards()
@@ -91,7 +93,7 @@ public class BattleShip
 		
 		}
 		
-		public static String[][] createHitMissBoardForCaptain()
+		public static void createHitMissBoardForCaptain()
 			{
 				playerHitMissBoard = new String [10][10];
 				
@@ -106,22 +108,71 @@ public class BattleShip
 						playerHitMissBoard[row][col] = space;
 						
 					}
-					
-					
-					
-					
+						
 				}
-				
-				
-				
-				return playerHitMissBoard;
-				
 			}
 		
-		public static void createAllBoards()
+		public static void addShip()
+		{
+			ships.add(new Destroyer());
+			ships.add(new Submarine());
+			ships.add(new Frigate());
+			ships.add(new Cruiser());
+			ships.add(new Dingy());
+		}
+		
+		public static void placeShips()
+		{
+			Scanner userInput = new Scanner(System.in);	
+			System.out.println("Would you like to place your ship (1) horizontally or (2) vertically.");
+			int placement = userInput.nextInt();
+			if (placement == 1)
+				{
+					placeHorizontal();
+				}
+			
+			else if (placement == 2)
+				{
+					placeVertical();
+				}
+			
+			else
+				{
+					System.out.println("That's not a valid option, try again.");
+					placeShips();
+				}
+			
+			
+		}
+		
+		
+		public static void placeHorizontal()
+		{
+			Scanner userInput = new Scanner(System.in);
+			System.out.println("What ship would you like to start with?");
+			for (int i = 0; i<placeShip.size(); i++)
+				{
+					System.out.println(i +1 +") "+placeShip.get(i).getName());
+				}
+			int ans = userInput.nextInt();
+			
+			System.out.println("You chose to place the " + ships.get(ans-1).getName() + ".");
+		}
+		
+		public static void placeVertical()
+		{
+			
+		}
+		
+		
+		
+		
+		public static void run()
 			{
 				createShipBoardForCaptain();
 				createHitMissBoardForCaptain();
+				addShip();
+				placeShips();
 			}
 
 		
