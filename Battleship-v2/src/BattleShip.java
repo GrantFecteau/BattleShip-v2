@@ -371,7 +371,7 @@ public class BattleShip
 				
 				System.out.println("You chose to place the " + placeShip2.get(ans-1).getName() + ".");
 				
-				printBoards();
+				printBoards2();
 				System.out.println("Where would you like to start?");
 				Scanner userInput1 = new Scanner (System.in); 
 				String startP = userInput1.nextLine();
@@ -644,6 +644,44 @@ public class BattleShip
 		
 		public static void p1Attack()
 		{
+			Scanner userInput = new Scanner(System.in);
+			System.out.println("Player 1's turn to attack, what would you like to do.");
+			System.out.println();
+			System.out.println("1. Attack Normally");
+			System.out.println("2. Use a special Attack");
+			System.out.println();
+			int ans = userInput.nextInt();
+			
+			if (ans == 1)
+				{
+				Scanner userInput1 = new Scanner (System.in);	
+				System.out.println("Which square would you like to hit?");
+				String attack = userInput1.nextLine();
+				int row = convertRow(attack);
+				int column = Integer.parseInt(attack.substring(1)) - 1;
+				if (playerShipBoard2[row][column].equals(" "))
+					{
+						System.out.println("Miss!");
+						playerShipBoard2[row][column] = "Mi";
+						playerHitMissBoard[row][column] ="Mi";
+					}
+				
+				else if (playerShipBoard2[row][column].equals("Mi") || playerShipBoard2[row][column].equals("Hi"))
+					{
+						System.out.println("You've already hit this spot.");
+						p1Attack();
+					}
+				
+				else
+					{
+						System.out.println("Hit!");
+						playerShipBoard2[row][column] = "Hi";
+						playerHitMissBoard[row][column] ="Hi";
+					}
+				}
+			
+			printBoards();
+			printBoards2();
 			
 		}
 		

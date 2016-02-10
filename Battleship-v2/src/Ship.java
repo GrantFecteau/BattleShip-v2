@@ -2,7 +2,7 @@
 public abstract class Ship
 	{
 		protected String name;
-		
+		protected AttackBehavior myAttacks;
 		protected int length;
 		protected int health;
 		protected int ammo;
