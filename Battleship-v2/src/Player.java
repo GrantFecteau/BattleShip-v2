@@ -12,6 +12,8 @@ public class Player
 		
 		private ArrayList<Ship> placeShip;
 		
+		private ArrayList<Ship> attacks;
+		
 		private int fleetHealth;
 		
 		public Player(String n)
@@ -21,7 +23,18 @@ public class Player
 		playerHitMissBoard = new String [10][10];
 		ships = new ArrayList<Ship>();
 		placeShip = ships;
+		attacks = placeShip;
 		}
+
+		public ArrayList<Ship> getAttacks()
+			{
+				return attacks;
+			}
+
+		public void setAttacks(ArrayList<Ship> attacks)
+			{
+				this.attacks = attacks;
+			}
 
 		public int getFleetHealth()
 			{

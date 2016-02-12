@@ -438,6 +438,36 @@ public class BattleShip
 					}
 				}
 			
+			else if (ans == 2)
+				{
+					
+					System.out.println("Which ship would you like to attack with?");
+					for (int i = 0; i < p.getShips().size(); i++)
+						{
+							boolean isFound = false;
+							for (int row = 0; row < 10; row++)
+								{
+									for (int col = 0; col <10; col++)
+										{
+											if (p.getShips().get(i).getLetter().equals(p.getPlayerShipBoard()[row][col]))
+												{
+													isFound = true;
+												}
+										}
+								}
+							if (isFound = true)
+								{
+									p.getAttacks().add(p.getShips().get(i));
+								}
+						}
+				}
+			
+			else
+				{
+					System.out.println("That's not valid.");
+					pAttack(p,p2);
+				}
+			
 			printBoards(p);
 			
 			

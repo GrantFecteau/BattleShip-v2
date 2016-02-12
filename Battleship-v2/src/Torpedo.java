@@ -2,11 +2,11 @@
 public class Torpedo implements AttackBehavior
 	{
 
-	@Override
-	public void doSpecial()
-		{
-			
-			
-		}
+		@Override
+		public void doSpecial()
+			{
+				
+				
+			}
 
 	}
