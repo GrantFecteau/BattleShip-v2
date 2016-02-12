@@ -49,7 +49,6 @@ public class BattleShip
 			}
 		}
 		
-		
 		public static void printBoards(Player p)
 		{
 			
@@ -57,7 +56,7 @@ public class BattleShip
 			
 			
 			System.out.println("             "+p.getName()+" Ship Board            ");
-			System.out.println("    1    2    3    4    5    6    7    8    9    0");
+			System.out.println("    1    2    3    4    5    6    7    8    9    10");
 			System.out.println("                                           ");
 			System.out.println("-----------------------------------------------------");
 			System.out.println("A | " + p.getPlayerShipBoard()[0][0] + " | " + p.getPlayerShipBoard()[0][1] + " | " + p.getPlayerShipBoard()[0][2] + " | " + p.getPlayerShipBoard()[0][3] + " | " + p.getPlayerShipBoard()[0][4] + " | " + p.getPlayerShipBoard()[0][5] + " | " + p.getPlayerShipBoard()[0][6] + " | " + p.getPlayerShipBoard()[0][7] + " | " + p.getPlayerShipBoard()[0][8] + " | " + p.getPlayerShipBoard()[0][9] + " |");
@@ -85,7 +84,7 @@ public class BattleShip
 
 
 			System.out.println("            " +p.getName() +" Hit/Miss Board            ");
-			System.out.println("    1    2    3    4    5    6    7    8    9    0");
+			System.out.println("    1    2    3    4    5    6    7    8    9    10");
 			System.out.println("                                           ");
 			System.out.println("-----------------------------------------------------");
 			System.out.println("A | " + p.getPlayerHitMissBoard()[0][0] + " | " + p.getPlayerHitMissBoard()[0][1] + " | " + p.getPlayerHitMissBoard()[0][2] + " | " + p.getPlayerHitMissBoard()[0][3] + " | " + p.getPlayerHitMissBoard()[0][4] + " | " + p.getPlayerHitMissBoard()[0][5] + " | " + p.getPlayerHitMissBoard()[0][6] + " | " + p.getPlayerHitMissBoard()[0][7] + " | " + p.getPlayerHitMissBoard()[0][8] + " | " + p.getPlayerHitMissBoard()[0][9] + " |");
@@ -119,7 +118,10 @@ public class BattleShip
 				p.getShips().add(new Frigate());
 				p.getShips().add(new Cruiser());
 				p.getShips().add(new Dingy());
-				
+				for (int i = 0; i < p.getShips().size(); i++)
+					{
+						p.setFleetHealth(p.getShips().get(i).getHealth());
+					}
 				
 			}
 		
@@ -147,7 +149,6 @@ public class BattleShip
 				}
 			}
 		}
-		
 			
 		public static void placeHorizontal(Player p)
 		{
@@ -194,18 +195,37 @@ public class BattleShip
 			}
 		if (column > column2)
 		{
+			
+			for (int i = column2; i < column+1; i++)
+				{
+					if (p.getPlayerShipBoard()[row][i] != "  ")
+						{
+							System.out.println("Sorry, you already have a ship there... cheater.");
+							placeHorizontal(p);
+						}
+				}
+			
 			for (int x = column2; x < column+1; x++)
-			{
-				p.getPlayerShipBoard()[row][x] = p.getPlaceShip().get(ans-1).getLetter();
-			}
+				{
+					p.getPlayerShipBoard()[row][x] = p.getPlaceShip().get(ans-1).getLetter();
+				}
 		}
 		
 		else if (column2 > column)
 		{
+			for (int i = column; i < column2+1; i++)
+				{
+					if (p.getPlayerShipBoard()[row][i] != "  ")
+						{
+							System.out.println("Sorry, you already have a ship there... cheater.");
+							placeHorizontal(p);
+						}
+				}
+			
 			for (int x = column; x < column2+1; x++)
-			{
-				p.getPlayerShipBoard()[row][x] = p.getPlaceShip().get(ans-1).getLetter();
-			}
+				{
+					p.getPlayerShipBoard()[row][x] = p.getPlaceShip().get(ans-1).getLetter();
+				}
 		}
 		printBoards(p);
 		p.getPlaceShip().remove(ans-1);
@@ -216,9 +236,7 @@ public class BattleShip
 		
 		
 		}
-		
-		
-		
+			
 		public static void placeVertical(Player p)
 		{
 		Scanner userInput = new Scanner(System.in);
@@ -264,18 +282,36 @@ public class BattleShip
 		}
 		if (row > row2)
 			{
-			for (int x = row2; x < row+1; x++)
-			{
-			p.getPlayerShipBoard()[x][column] = p.getPlaceShip().get(ans-1).getLetter();
+				for (int i = row2; i < row+1; i++)
+					{
+						if (p.getPlayerShipBoard()[i][column] != "  ")
+							{
+								System.out.println("Sorry, there's already a ship there... scum.");
+								placeVertical(p);
+							}
+					}
+				for (int x = row2; x < row+1; x++)
+					{
+						p.getPlayerShipBoard()[x][column] = p.getPlaceShip().get(ans-1).getLetter();
+					}
 			}
-	}
-	
+		
 	else if (row2 > row)
 	{
+		for (int i = row; i < row2+1; i++)
+			{
+				if (p.getPlayerShipBoard()[i][column] != "  ")
+					{
+						System.out.println("Sorry, there's already a ship there... scum.");
+						placeVertical(p);
+					}
+			}
+		
+		
 		for (int x = row; x < row2+1; x++)
-		{
-			p.getPlayerShipBoard()[x][column] = p.getPlaceShip().get(ans-1).getLetter();
-		}
+			{
+				p.getPlayerShipBoard()[x][column] = p.getPlaceShip().get(ans-1).getLetter();
+			}
 	}
 	printBoards(p);
 	p.getPlaceShip().remove(ans-1);
@@ -284,7 +320,6 @@ public class BattleShip
 		placeShips(p);
 	}
 	}
-		
 		
 		public static int convertRow(String s, Player p)
 		{
@@ -365,7 +400,7 @@ public class BattleShip
 			return row;
 		}
 		
-		public static void p1Attack(Player p, Player p2)
+		public static void pAttack(Player p, Player p2)
 		{
 			Scanner userInput = new Scanner(System.in);
 			System.out.println(p.getName() + "'s turn to attack, what would you like to do.");
@@ -374,7 +409,7 @@ public class BattleShip
 			System.out.println("2. Use a special Attack");
 			System.out.println();
 			int ans = userInput.nextInt();
-			
+			printBoards(p);
 			if (ans == 1)
 				{
 				Scanner userInput1 = new Scanner (System.in);	
@@ -392,7 +427,7 @@ public class BattleShip
 				else if (p2.getPlayerShipBoard()[row][column].equals("Mi") || p2.getPlayerShipBoard()[row][column].equals("Hi"))
 					{
 						System.out.println("You've already hit this spot.");
-						p1Attack(p,p2);
+						pAttack(p,p2);
 					}
 				
 				else
@@ -407,9 +442,7 @@ public class BattleShip
 			
 			
 		}
-		
-		
-		
+			
 		public static void printSpace()
 				{
 					try
@@ -442,9 +475,13 @@ public class BattleShip
 				placeShips(players.get(0));
 				printSpace();
 				placeShips(players.get(1));
-				printSpace();
-				p1Attack(players.get(0), players.get(1));
-				
+				while (players.get(0).getFleetHealth() > 0 && players.get(1).getFleetHealth() > 0)
+					{
+						printSpace();
+						pAttack(players.get(0), players.get(1));
+						printSpace();
+						pAttack(players.get(1), players.get(0));
+					}
 			}
 
 		

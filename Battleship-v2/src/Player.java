@@ -12,6 +12,8 @@ public class Player
 		
 		private ArrayList<Ship> placeShip;
 		
+		private int fleetHealth;
+		
 		public Player(String n)
 		{
 		name = n;
@@ -20,6 +22,16 @@ public class Player
 		ships = new ArrayList<Ship>();
 		placeShip = ships;
 		}
+
+		public int getFleetHealth()
+			{
+				return fleetHealth;
+			}
+
+		public void setFleetHealth(int fleetHealth)
+			{
+				this.fleetHealth = fleetHealth;
+			}
 
 		public String getName()
 			{
