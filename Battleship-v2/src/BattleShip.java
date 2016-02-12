@@ -125,7 +125,8 @@ public class BattleShip
 		
 		public static void placeShips(Player p)
 		{
-			
+			if (p.getPlaceShip().size()>0)
+			{
 			Scanner userInput = new Scanner(System.in);	
 			System.out.println("Would you like to place your ship (1) horizontally or (2) vertically.");
 			int placement = userInput.nextInt();
@@ -144,6 +145,7 @@ public class BattleShip
 					System.out.println("That's not a valid option, try again.");
 					placeShips(p);
 				}
+			}
 		}
 		
 			
@@ -180,12 +182,12 @@ public class BattleShip
 			String endP = userInput2.nextLine();
 			int column2 = Integer.parseInt(endP.substring(1)) - 1;
 			int row2 = convertRow(endP,p);
-			if (column > 9 || row != row2)
+			if (column2 > 9 || row != row2)
 			{
 				System.out.println("Sorry that's not valid, try again.");
 				placeHorizontal(p);
 			}
-			else if (Math.abs(column - column2) >= p.getPlaceShip().get(ans-1).getLength())
+			else if (Math.abs(column - column2) != p.getPlaceShip().get(ans-1).getLength()-1)
 			{
 				System.out.println("Sorry, that's not valid, try again.");
 				placeHorizontal(p);
@@ -255,7 +257,7 @@ public class BattleShip
 			System.out.println("Sorry that's not valid, try again.");
 			placeVertical(p);
 		}
-		else if (Math.abs(row - row2) >= p.getPlaceShip().get(ans-1).getLength())
+		else if (Math.abs(row - row2) != p.getPlaceShip().get(ans-1).getLength()-1)
 		{
 			System.out.println("Sorry, that's not valid, try again.");
 			placeVertical(p);
