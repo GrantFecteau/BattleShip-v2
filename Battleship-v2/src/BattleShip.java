@@ -479,7 +479,7 @@ public class BattleShip
 					
 					for (int q = 0; q < p.getAttacks().size(); q++)
 					{
-						System.out.println(p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
+						System.out.println(q +") " +p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
 					}
 					int shipans = userInput2.nextInt();
 					
