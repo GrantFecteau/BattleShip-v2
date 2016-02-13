@@ -3,6 +3,7 @@ public class Destroyer extends Ship
 	{
 		public Destroyer()
 		{
+			attackName = "Missile";
 			myAttacks = (AttackBehavior) new Missile();
 			name = "Destroyer";
 			length = 5;

@@ -120,7 +120,7 @@ public class BattleShip
 				p.getShips().add(new Dingy());
 				for (int i = 0; i < p.getShips().size(); i++)
 					{
-						p.setFleetHealth(p.getShips().get(i).getHealth());
+						p.setFleetHealth(p.getFleetHealth() + p.getShips().get(i).getHealth());
 					}
 				
 			}
@@ -170,14 +170,16 @@ public class BattleShip
 			if (startP.length() < 2)
 				{
 					System.out.println("Sorry that's not valid, try again!");
-					placeHorizontal(p);
+					placeShips(p);
+					return;
 				}
 			int column = Integer.parseInt(startP.substring(1)) - 1;
 			int row = convertRow(startP,p);
 			if (column > 9)
 				{
 					System.out.println("Sorry that's not valid, try again.");
-					placeHorizontal(p);
+					placeShips(p);
+					return;
 				}
 			System.out.println("Now enter the end point, remember, it needs to the length of the ship away from the starting point.");
 			String endP = userInput2.nextLine();
@@ -186,12 +188,14 @@ public class BattleShip
 			if (column2 > 9 || row != row2)
 			{
 				System.out.println("Sorry that's not valid, try again.");
-				placeHorizontal(p);
+				placeShips(p);
+				return;
 			}
 			else if (Math.abs(column - column2) != p.getPlaceShip().get(ans-1).getLength()-1)
 			{
 				System.out.println("Sorry, that's not valid, try again.");
-				placeHorizontal(p);
+				placeShips(p);
+				return;
 			}
 		if (column > column2)
 		{
@@ -201,7 +205,8 @@ public class BattleShip
 					if (p.getPlayerShipBoard()[row][i] != "  ")
 						{
 							System.out.println("Sorry, you already have a ship there... cheater.");
-							placeHorizontal(p);
+							placeShips(p);
+							return;
 						}
 				}
 			
@@ -217,15 +222,18 @@ public class BattleShip
 				{
 					if (p.getPlayerShipBoard()[row][i] != "  ")
 						{
-							System.out.println("Sorry, you already have a ship there... cheater.");
-							placeHorizontal(p);
+							System.out.println("Sorry, you already have a ship there... cheater.");					
+							placeShips(p);
+							return;
 						}
 				}
+			
 			
 			for (int x = column; x < column2+1; x++)
 				{
 					p.getPlayerShipBoard()[row][x] = p.getPlaceShip().get(ans-1).getLetter();
 				}
+			
 		}
 		printBoards(p);
 		p.getPlaceShip().remove(ans-1);
@@ -257,14 +265,14 @@ public class BattleShip
 		if (startP.length() < 2)
 			{
 				System.out.println("Sorry that's not valid, try again!");
-				placeVertical(p);
+				placeShips(p); return;
 			}
 		int column = Integer.parseInt(startP.substring(1)) - 1;
 		int row = convertRow(startP, p);
 		if (column > 9)
 			{
 				System.out.println("Sorry that's not valid, try again.");
-				placeVertical(p);
+				placeShips(p); return;
 			}
 		System.out.println("Now enter the end point, remember, it needs to the length of the ship away from the starting point.");
 		String endP = userInput2.nextLine();
@@ -273,12 +281,12 @@ public class BattleShip
 		if (column > 9 || column != column2)
 		{
 			System.out.println("Sorry that's not valid, try again.");
-			placeVertical(p);
+			placeShips(p); return;
 		}
 		else if (Math.abs(row - row2) != p.getPlaceShip().get(ans-1).getLength()-1)
 		{
 			System.out.println("Sorry, that's not valid, try again.");
-			placeVertical(p);
+			placeShips(p); return;
 		}
 		if (row > row2)
 			{
@@ -287,7 +295,7 @@ public class BattleShip
 						if (p.getPlayerShipBoard()[i][column] != "  ")
 							{
 								System.out.println("Sorry, there's already a ship there... scum.");
-								placeVertical(p);
+								placeShips(p); return;
 							}
 					}
 				for (int x = row2; x < row+1; x++)
@@ -303,7 +311,7 @@ public class BattleShip
 				if (p.getPlayerShipBoard()[i][column] != "  ")
 					{
 						System.out.println("Sorry, there's already a ship there... scum.");
-						placeVertical(p);
+						placeShips(p); return;
 					}
 			}
 		
@@ -417,7 +425,7 @@ public class BattleShip
 				String attack = userInput1.nextLine();
 				int row = convertRow(attack, p);
 				int column = Integer.parseInt(attack.substring(1)) - 1;
-				if (p2.getPlayerShipBoard()[row][column].equals(" "))
+				if (p2.getPlayerShipBoard()[row][column].equals("  "))
 					{
 						System.out.println("Miss!");
 						p2.getPlayerShipBoard()[row][column] = "Mi";
@@ -435,12 +443,13 @@ public class BattleShip
 						System.out.println("Hit!");
 						p2.getPlayerShipBoard()[row][column] = "Hi";
 						p.getPlayerHitMissBoard()[row][column] ="Hi";
+						p2.setFleetHealth(p2.getFleetHealth() -1);
 					}
 				}
 			
 			else if (ans == 2)
 				{
-					
+					Scanner userInput2= new Scanner (System.in);
 					System.out.println("Which ship would you like to attack with?");
 					for (int i = 0; i < p.getShips().size(); i++)
 						{
@@ -455,11 +464,25 @@ public class BattleShip
 												}
 										}
 								}
-							if (isFound = true)
+							if (isFound == true)
 								{
 									p.getAttacks().add(p.getShips().get(i));
 								}
 						}
+					for (int x = 0; x < p.getAttacks().size();x++)
+					{
+						if (p.getAttacks().get(x).getAmmo()==0)
+						{
+							p.getAttacks().remove(x);
+						}
+					}
+					
+					for (int q = 0; q < p.getAttacks().size(); q++)
+					{
+						System.out.println(p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
+					}
+					int shipans = userInput2.nextInt();
+					
 				}
 			
 			else
@@ -488,6 +511,19 @@ public class BattleShip
 					System.out.println();
 				}
 		
+		public static void determineWin(Player p,Player p2)
+		{
+			if (p.getFleetHealth() > p2.getFleetHealth())
+			{
+				System.out.println("PLAYER 1 WINS!");
+			}
+			else if (p.getFleetHealth() < p2.getFleetHealth())
+			{
+				System.out.println("PLAYER 2 WINS!");
+			}
+					
+		}
+		
 		public static void run()
 			{
 				ArrayList <Player> players = new ArrayList<Player>();
@@ -507,11 +543,12 @@ public class BattleShip
 				placeShips(players.get(1));
 				while (players.get(0).getFleetHealth() > 0 && players.get(1).getFleetHealth() > 0)
 					{
-						printSpace();
+						//printSpace();
 						pAttack(players.get(0), players.get(1));
-						printSpace();
+					//	printSpace();
 						pAttack(players.get(1), players.get(0));
 					}
+				determineWin(players.get(0), players.get(1));
 			}
 
 		

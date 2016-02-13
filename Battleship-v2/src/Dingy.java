@@ -4,6 +4,7 @@ public class Dingy extends Ship
 	
 		public Dingy()
 		{
+			attackName = "";
 			myAttacks = (AttackBehavior) new Missile();
 			name = "Dinghy";
 			length = 2;

@@ -1,6 +1,19 @@
 
 public abstract class Ship
 	{
+		protected String attackName = "";
+		public String getAttackName() {
+			return attackName;
+		}
+		public void setAttackName(String attackName) {
+			this.attackName = attackName;
+		}
+		public AttackBehavior getMyAttacks() {
+			return myAttacks;
+		}
+		public void setMyAttacks(AttackBehavior myAttacks) {
+			this.myAttacks = myAttacks;
+		}
 		protected String name;
 		protected AttackBehavior myAttacks;
 		protected int length;
