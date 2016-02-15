@@ -597,8 +597,6 @@ public class BattleShip
 		
 			
 		}
-		
-		
 			
 		public static void printSpace()
 				{
