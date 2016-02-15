@@ -5,6 +5,8 @@ public class Torpedo implements AttackBehavior
 		@Override
 		public void doSpecial(Player p, Player p2)
 			{
+			try 
+			{
 				Scanner userInput1 = new Scanner (System.in);
 				System.out.println("Enter the square you would like to aim for. The Torpedo will come from the bottom of the board and move in a straight lining hitting anything in its path.");
 				String attack = userInput1.nextLine();
@@ -48,6 +50,12 @@ public class Torpedo implements AttackBehavior
 					p.getPlayerHitMissBoard()[row][column] ="Hi";
 					p2.setFleetHealth(p2.getFleetHealth() -1);
 				}
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("Sorry, that's invalid!");
+				doSpecial(p,p2);
+			}
 				
 				
 				

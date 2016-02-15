@@ -1,8 +1,11 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Missile implements AttackBehavior
 	{
 		@Override
 		public void doSpecial(Player p, Player p2)
+			{
+			try
 			{
 				System.out.println("The missile Special Attack will hit a 3x3 area surrounding the square you input. You cannot call a missile strike on the edges of the board.");
 				Scanner userInput1 = new Scanner (System.in);	
@@ -41,6 +44,12 @@ public class Missile implements AttackBehavior
 					System.out.println("Sorry, that's not valid.");
 					doSpecial(p,p2);
 				}
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("Sorry, that's invalid!");
+				doSpecial(p,p2);
+			}
 				
 			}
 		
