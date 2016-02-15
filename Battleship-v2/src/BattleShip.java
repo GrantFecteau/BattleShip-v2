@@ -198,7 +198,12 @@ public class BattleShip
 					System.out.println(i +1 +") "+p.getPlaceShip().get(i).getName() + " Length : " + p.getPlaceShip().get(i).getLength());
 				}
 			int ans = userInput.nextInt();
-			
+			if (ans > p.getPlaceShip().size())
+			{
+				System.out.println("That's not valid, try choosing a ship that is inbounds.");
+				placeShips(p);
+				return;
+			}
 			System.out.println("You chose to place the " + p.getPlaceShip().get(ans-1).getName() + ".");
 			
 			printBoards(p);
@@ -304,7 +309,12 @@ public class BattleShip
 				System.out.println(i +1 +") "+p.getPlaceShip().get(i).getName() + " Length : " + p.getPlaceShip().get(i).getLength());
 			}
 		int ans = userInput.nextInt();
-		
+		if (ans > p.getPlaceShip().size())
+		{
+			System.out.println("That's not valid, try choosing a ship that is inbounds.");
+			placeShips(p);
+			return;
+		}
 		System.out.println("You chose to place the " + p.getPlaceShip().get(ans-1).getName() + ".");
 		
 		printBoards(p);
