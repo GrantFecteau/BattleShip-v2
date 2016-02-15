@@ -118,12 +118,17 @@ public class BattleShip
 				p.getShips().add(new Frigate());
 				p.getShips().add(new Cruiser());
 				p.getShips().add(new Dingy());
-				for (int i = 0; i < p.getShips().size(); i++)
-					{
-						p.setFleetHealth(p.getFleetHealth() + p.getShips().get(i).getHealth());
-					}
+				
 				
 			}
+		
+		public static void makeFleetHealth(Player p)
+		{
+			for (int i = 0; i < p.getShips().size(); i++)
+			{
+				p.setFleetHealth(p.getFleetHealth() + p.getShips().get(i).getHealth());
+			}
+		}
 		
 		public static void placeShips(Player p)
 		{
@@ -410,6 +415,8 @@ public class BattleShip
 		
 		public static void pAttack(Player p, Player p2)
 		{
+			if (p.getFleetHealth() > 0 && p2.getFleetHealth()>0)
+			{
 			Scanner userInput = new Scanner(System.in);
 			System.out.println(p.getName() + "'s turn to attack, what would you like to do.");
 			System.out.println();
@@ -450,8 +457,7 @@ public class BattleShip
 			else if (ans == 2)
 				{
 					Scanner userInput2= new Scanner (System.in);
-					System.out.println("Which ship would you like to attack with?");
-					System.out.println(p.getShips().size());
+					
 					boolean isFound;
 					for (int shi = 0; shi < p.getShips().size(); shi++)
 					{
@@ -483,14 +489,9 @@ public class BattleShip
 							x--;
 						}
 					}
-					if (p.getShips().size() > 0)
-					{
-						System.out.println("Test.");
-					}
-					else
-					{
-						System.out.println("Fail");
-					}
+					if (p.getAttacks().size() > 0)
+					{	
+					System.out.println("Which ship would you like to attack with?");
 					for (int q = 0; q < p.getAttacks().size(); q++)
 					{
 						System.out.println(q + 1 +") " +p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
@@ -507,6 +508,12 @@ public class BattleShip
 					
 					p.getAttacks().clear();
 					
+					}
+					else
+					{
+						System.out.println("You have no more special attacks! Try again!");
+						pAttack(p,p2);
+					}
 				}
 			
 			else
@@ -514,9 +521,15 @@ public class BattleShip
 					System.out.println("That's not valid.");
 					pAttack(p,p2);
 				}
-			
+					
+				
 			printBoards(p);
-			
+			}
+			else
+			{
+				determineWin(p,p2);
+			}
+		
 			
 		}
 		
@@ -541,11 +554,11 @@ public class BattleShip
 		{
 			if (p.getFleetHealth() > p2.getFleetHealth())
 			{
-				System.out.println("PLAYER 1 WINS!");
+				System.out.println(p.getName()+ "WINS!");
 			}
 			else if (p.getFleetHealth() < p2.getFleetHealth())
 			{
-				System.out.println("PLAYER 2 WINS!");
+				System.out.println(p2.getName() + "WINS!");
 			}
 					
 		}
@@ -561,6 +574,8 @@ public class BattleShip
 				createHitMissBoardForCaptain(players.get(1));
 				addShip(players.get(0));
 				addShip(players.get(1));
+				makeFleetHealth(players.get(0));
+				makeFleetHealth(players.get(1));
 				greetPlayer1(players.get(0));
 				players.get(0).setPlaceShip(players.get(0).getShips());
 				players.get(1).setPlaceShip(players.get(1).getShips());
@@ -576,7 +591,6 @@ public class BattleShip
 						//printSpace();
 						pAttack(players.get(1), players.get(0));
 					}
-				determineWin(players.get(0), players.get(1));
 			}
 
 		

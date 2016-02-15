@@ -21,6 +21,10 @@ public class Missile implements AttackBehavior
 								p2.getPlayerShipBoard()[row1][col1] = "Mi";
 								p.getPlayerHitMissBoard()[row1][col1] ="Mi";
 							}
+							else if (p2.getPlayerShipBoard()[row1][col1].equals("Hi"))
+							{
+								
+							}
 							else
 							{
 								System.out.println("Hit!");

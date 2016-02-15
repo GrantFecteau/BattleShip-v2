@@ -18,6 +18,10 @@ public class Torpedo implements AttackBehavior
 						p2.getPlayerShipBoard()[row1][column] = "Mi";
 						p.getPlayerHitMissBoard()[row1][column] ="Mi";
 					}
+					else if (p2.getPlayerShipBoard()[row1][column].equals("Hi"))
+					{
+						
+					}
 					else
 					{
 						System.out.println("Hit!");
@@ -32,6 +36,10 @@ public class Torpedo implements AttackBehavior
 					System.out.println("Miss!");
 					p2.getPlayerShipBoard()[row][column] = "Mi";
 					p.getPlayerHitMissBoard()[row][column] ="Mi";
+				}
+				else if (p2.getPlayerShipBoard()[row][column].equals("Hi"))
+				{
+					
 				}
 				else
 				{
