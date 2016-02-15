@@ -8,9 +8,30 @@ public class BattleShip
 		public static void greetPlayer1(Player p)
 		{
 			System.out.println("Hello Captains! Welcome to Battleship. These waters are harsh, and your objective to to completely demolish your enemy captain.");
+			System.out.println("                                  |__");
+			System.out.println("                                  |\\/");
+			System.out.println("                                  ---");
+			System.out.println("                                 / | [");
+			System.out.println("                          !      | |||");
+			System.out.println("                        _/|     _/|-++'");
+			System.out.println("                    +  +--|    |--|--|_ |-");
+			System.out.println("                  { /|__|  |//\\__|  |--- |||__//");
+			System.out.println("                  +---------------___[}-_===_.'____                   //\\");
+			System.out.println("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\//   _");
+			System.out.println("__..._____--==//___]_|__|_____________________________[___\\==--____,------' .7");
+			System.out.println("|                                                      S.S Relmaar los kaaz /");
+			System.out.println("\\_________________________________________________________________________|");
+			
+			System.out.println("                   WELCOME TO THE BATTLE WATERS MEN!");
 			System.out.println("Let the game begin! Player 1 will place their ships first, followed by Player 2. When you're ready player 1, feel free to begin.");
 			System.out.println();;
 			printBoards(p);
+		}
+		
+		public static void greetPlayer2()
+		{
+			System.out.println("Plsyer 2! It is now your turn to begin placing ships. You will not be able to see Player 1's boards, so it's a waste of time trying.");
+			System.out.println("Once you finish placing your ships, Player 1 will begin attacking, followed by you until one of you runs out of ships, good luck!");
 		}
 		
 		public static void createShipBoardForCaptain(Player p)
@@ -132,6 +153,8 @@ public class BattleShip
 		
 		public static void placeShips(Player p)
 		{
+			try
+			{
 			if (p.getPlaceShip().size()>0)
 			{
 			Scanner userInput = new Scanner(System.in);	
@@ -153,10 +176,20 @@ public class BattleShip
 					placeShips(p);
 				}
 			}
+			}
+			
+			catch (InputMismatchException e)
+			{
+				System.out.println("Sorry, that's invalid!");
+				placeShips(p);
+				return;
+			}
 		}
 			
 		public static void placeHorizontal(Player p)
 		{
+			try
+			{
 			Scanner userInput = new Scanner(System.in);
 			Scanner userInput2 = new Scanner(System.in);
 			System.out.println("What ship would you like to start with?");
@@ -171,6 +204,7 @@ public class BattleShip
 			printBoards(p);
 			System.out.println("Where would you like to start?");
 			Scanner userInput1 = new Scanner (System.in); 
+			
 			String startP = userInput1.nextLine();
 			if (startP.length() < 2)
 				{
@@ -186,6 +220,8 @@ public class BattleShip
 					placeShips(p);
 					return;
 				}
+			
+			
 			System.out.println("Now enter the end point, remember, it needs to the length of the ship away from the starting point.");
 			String endP = userInput2.nextLine();
 			int column2 = Integer.parseInt(endP.substring(1)) - 1;
@@ -247,10 +283,18 @@ public class BattleShip
 			placeShips(p);
 		}
 		
-		
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("Sorry, that's invalid!");
+				placeShips(p);
+				return;
+			}
 		}
 			
 		public static void placeVertical(Player p)
+		{
+		try
 		{
 		Scanner userInput = new Scanner(System.in);
 		Scanner userInput2 = new Scanner(System.in);
@@ -281,6 +325,11 @@ public class BattleShip
 			}
 		System.out.println("Now enter the end point, remember, it needs to the length of the ship away from the starting point.");
 		String endP = userInput2.nextLine();
+		if (endP.length() < 2)
+		{
+			System.out.println("Sorry that's not valid, try again!");
+			placeShips(p); return;
+		}
 		int column2 = Integer.parseInt(endP.substring(1)) - 1;
 		int row2 = convertRow(endP,p);
 		if (column > 9 || column != column2)
@@ -332,6 +381,13 @@ public class BattleShip
 	{
 		placeShips(p);
 	}
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("Sorry, that's invalid!");
+				placeShips(p);
+				return;
+			}
 	}
 		
 		public static int convertRow(String s, Player p)
@@ -415,6 +471,8 @@ public class BattleShip
 		
 		public static void pAttack(Player p, Player p2)
 		{
+			try
+			{
 			if (p.getFleetHealth() > 0 && p2.getFleetHealth()>0)
 			{
 			Scanner userInput = new Scanner(System.in);
@@ -529,6 +587,13 @@ public class BattleShip
 			{
 				determineWin(p,p2);
 			}
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("Sorry, that's invalid!");
+				placeShips(p);
+				return;
+			}
 		
 			
 		}
@@ -581,6 +646,7 @@ public class BattleShip
 				players.get(1).setPlaceShip(players.get(1).getShips());
 				placeShips(players.get(0));
 				printSpace();
+				greetPlayer2();
 				placeShips(players.get(1));
 				addShip(players.get(0));
 				addShip(players.get(1));
