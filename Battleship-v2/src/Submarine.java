@@ -4,6 +4,7 @@ public class Submarine extends Ship
 
 		public Submarine()
 		{
+			attackName = "Torpedo";
 			myAttacks = (AttackBehavior) new Torpedo();
 			name = "Submarine";
 			length = 3;

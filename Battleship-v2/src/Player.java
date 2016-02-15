@@ -23,7 +23,7 @@ public class Player
 		playerHitMissBoard = new String [10][10];
 		ships = new ArrayList<Ship>();
 		placeShip = ships;
-		attacks = placeShip;
+		attacks = new ArrayList<Ship>();
 		}
 
 		public ArrayList<Ship> getAttacks()

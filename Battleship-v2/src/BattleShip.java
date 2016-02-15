@@ -451,37 +451,51 @@ public class BattleShip
 				{
 					Scanner userInput2= new Scanner (System.in);
 					System.out.println("Which ship would you like to attack with?");
-					for (int i = 0; i < p.getShips().size(); i++)
+					System.out.println(p.getShips().size());
+					boolean isFound;
+					for (int shi = 0; shi < p.getShips().size(); shi++)
+					{
+						isFound = false;
+						
+						for (int row1 = 0; row1 <10; row1++)
 						{
-							boolean isFound = false;
-							for (int row = 0; row < 10; row++)
+							for (int col1 = 0; col1 < 10; col1++)
+							{
+								if (p.getShips().get(shi).getLetter().equals(p.getPlayerShipBoard()[row1][col1]))
 								{
-									for (int col = 0; col <10; col++)
-										{
-											if (p.getShips().get(i).getLetter().equals(p.getPlayerShipBoard()[row][col]))
-												{
-													isFound = true;
-												}
-										}
+									isFound = true;
 								}
-							if (isFound == true)
-								{
-									p.getAttacks().add(p.getShips().get(i));
-								}
+							}
+							
 						}
+						if (isFound)
+						{
+							p.getAttacks().add(p.getShips().get(shi));
+						}
+						
+					}
+					
 					for (int x = 0; x < p.getAttacks().size();x++)
 					{
 						if (p.getAttacks().get(x).getAmmo()==0)
 						{
 							p.getAttacks().remove(x);
+							x--;
 						}
 					}
-					
+					if (p.getShips().size() > 0)
+					{
+						System.out.println("Test.");
+					}
+					else
+					{
+						System.out.println("Fail");
+					}
 					for (int q = 0; q < p.getAttacks().size(); q++)
 					{
-						System.out.println(q +") " +p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
+						System.out.println(q + 1 +") " +p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
 					}
-					int shipans = userInput2.nextInt();
+					int shipans = userInput2.nextInt()-1;
 					
 				}
 			
@@ -495,6 +509,8 @@ public class BattleShip
 			
 			
 		}
+		
+		
 			
 		public static void printSpace()
 				{
@@ -541,11 +557,13 @@ public class BattleShip
 				placeShips(players.get(0));
 				printSpace();
 				placeShips(players.get(1));
+				addShip(players.get(0));
+				addShip(players.get(1));
 				while (players.get(0).getFleetHealth() > 0 && players.get(1).getFleetHealth() > 0)
 					{
 						//printSpace();
 						pAttack(players.get(0), players.get(1));
-					//	printSpace();
+						//printSpace();
 						pAttack(players.get(1), players.get(0));
 					}
 				determineWin(players.get(0), players.get(1));
