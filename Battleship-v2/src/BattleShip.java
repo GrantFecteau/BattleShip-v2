@@ -652,9 +652,9 @@ public class BattleShip
 				addShip(players.get(1));
 				while (players.get(0).getFleetHealth() > 0 && players.get(1).getFleetHealth() > 0)
 					{
-						//printSpace();
+						printSpace();
 						pAttack(players.get(0), players.get(1));
-						//printSpace();
+						printSpace();
 						pAttack(players.get(1), players.get(0));
 					}
 			}
