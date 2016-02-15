@@ -30,7 +30,7 @@ public class BattleShip
 		
 		public static void greetPlayer2()
 		{
-			System.out.println("Plsyer 2! It is now your turn to begin placing ships. You will not be able to see Player 1's boards, so it's a waste of time trying.");
+			System.out.println("Player 2! It is now your turn to begin placing ships. You will not be able to see Player 1's boards, so it's a waste of time trying.");
 			System.out.println("Once you finish placing your ships, Player 1 will begin attacking, followed by you until one of you runs out of ships, good luck!");
 		}
 		
@@ -617,11 +617,11 @@ public class BattleShip
 		{
 			if (p.getFleetHealth() > p2.getFleetHealth())
 			{
-				System.out.println(p.getName()+ "WINS!");
+				System.out.println(p.getName()+ " WINS!");
 			}
 			else if (p.getFleetHealth() < p2.getFleetHealth())
 			{
-				System.out.println(p2.getName() + "WINS!");
+				System.out.println(p2.getName() + " WINS!");
 			}
 					
 		}
