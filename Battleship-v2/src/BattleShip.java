@@ -602,6 +602,7 @@ public class BattleShip
 			{
 				System.out.println("Sorry, that's invalid!");
 				pAttack(p,p2);
+				p.getAttacks().clear();
 				return;
 			}
 		
