@@ -591,7 +591,7 @@ public class BattleShip
 			catch (InputMismatchException e)
 			{
 				System.out.println("Sorry, that's invalid!");
-				placeShips(p);
+				pAttack(p,p2);
 				return;
 			}
 		
