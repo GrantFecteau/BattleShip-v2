@@ -496,6 +496,16 @@ public class BattleShip
 						System.out.println(q + 1 +") " +p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
 					}
 					int shipans = userInput2.nextInt()-1;
+					p.getAttacks().get(shipans).getMyAttacks().doSpecial(p,p2);
+					for (int m = 0; m < p.getShips().size(); m++)
+					{
+						if (p.getAttacks().get(shipans).getLetter().equals(p.getShips().get(m).getLetter()))
+						{
+							p.getShips().get(m).setAmmo(0);
+						}
+					}
+					
+					p.getAttacks().clear();
 					
 				}
 			
