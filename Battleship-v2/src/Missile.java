@@ -10,7 +10,7 @@ public class Missile implements AttackBehavior
 				System.out.println("The missile Special Attack will hit a 3x3 area surrounding the square you input. You cannot call a missile strike on the edges of the board.");
 				Scanner userInput1 = new Scanner (System.in);	
 				String attack = userInput1.nextLine();
-				int row = BattleShip.convertRow(attack, p);
+				int row = BattleShip.convertAttackRow(attack, p,p2);
 				int column = Integer.parseInt(attack.substring(1)) - 1;
 				if (row > 0 && row < 9 && column > 0 && column < 9)
 				{
@@ -18,11 +18,11 @@ public class Missile implements AttackBehavior
 					{
 						for (int col1 = column-1; col1 < column+2; col1++)
 						{
-							if (p2.getPlayerShipBoard()[row1][col1].equals("  ")|| p2.getPlayerShipBoard()[row1][col1].equals("Mi"))
+							if (p2.getPlayerShipBoard()[row1][col1].equals("  ")|| p2.getPlayerShipBoard()[row1][col1].equals("Ms"))
 							{
 								System.out.println("Miss!");
-								p2.getPlayerShipBoard()[row1][col1] = "Mi";
-								p.getPlayerHitMissBoard()[row1][col1] ="Mi";
+								p2.getPlayerShipBoard()[row1][col1] = "Ms";
+								p.getPlayerHitMissBoard()[row1][col1] ="Ms";
 							}
 							else if (p2.getPlayerShipBoard()[row1][col1].equals("Hi"))
 							{

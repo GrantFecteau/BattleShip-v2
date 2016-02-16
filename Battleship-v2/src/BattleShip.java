@@ -209,9 +209,8 @@ public class BattleShip
 			printBoards(p);
 			System.out.println("Where would you like to start?");
 			Scanner userInput1 = new Scanner (System.in); 
-			
 			String startP = userInput1.nextLine();
-			if (startP.length() < 2)
+			if (startP.length() != 2)
 				{
 					System.out.println("Sorry that's not valid, try again!");
 					placeShips(p);
@@ -229,6 +228,12 @@ public class BattleShip
 			
 			System.out.println("Now enter the end point, remember, it needs to the length of the ship away from the starting point.");
 			String endP = userInput2.nextLine();
+			if (endP.length() != 2)
+				{
+					System.out.println("Sorry that's not valid, try again!");
+					placeShips(p);
+					return;
+				}
 			int column2 = Integer.parseInt(endP.substring(1)) - 1;
 			int row2 = convertRow(endP,p);
 			if (column2 > 9 || row != row2)
@@ -321,7 +326,7 @@ public class BattleShip
 		System.out.println("Where would you like to start?");
 		Scanner userInput1 = new Scanner (System.in); 
 		String startP = userInput1.nextLine();
-		if (startP.length() < 2)
+		if (startP.length() != 2)
 			{
 				System.out.println("Sorry that's not valid, try again!");
 				placeShips(p); return;
@@ -335,7 +340,7 @@ public class BattleShip
 			}
 		System.out.println("Now enter the end point, remember, it needs to the length of the ship away from the starting point.");
 		String endP = userInput2.nextLine();
-		if (endP.length() < 2)
+		if (endP.length() != 2)
 		{
 			System.out.println("Sorry that's not valid, try again!");
 			placeShips(p); return;
@@ -479,6 +484,85 @@ public class BattleShip
 			return row;
 		}
 		
+		public static int convertAttackRow(String s, Player p, Player p2)
+			{
+				int row=0;
+				
+				switch (s.substring(0,1))
+				{
+			case "a":
+			case "A":	
+				{
+				row = 0;
+				break;	
+				}
+			case "b":
+			case "B":
+				{
+				row = 1;
+				break;
+				}
+			case "c":
+			case "C":
+				{
+				row = 2;
+				break;
+				}
+			case "d":
+			case "D":
+				{
+				row = 3;
+				break;
+				}
+			case "e":
+			case "E":
+				{
+			    row = 4;
+			    break;
+				}
+			case "f":
+			case "F":
+				{
+				row = 5;
+				break;
+				}
+			case "g":
+			case "G":
+				{
+				row = 6;
+				break;
+				}
+			case "h":
+			case "H":
+				{
+				row = 7;
+				break;
+				}
+			case "i":
+			case "I":
+				{
+				row = 8;
+				break;
+				}
+			case "j":
+			case "J":
+				{
+				row = 9;
+				break;
+				}
+				default:
+				{
+					System.out.println("Sorry that's not valid, try again!");
+					pAttack(p,p2);
+				}
+			
+			
+			}
+			
+			
+				return row;
+			}
+				
 		public static void pAttack(Player p, Player p2)
 		{
 			try
@@ -498,16 +582,16 @@ public class BattleShip
 				Scanner userInput1 = new Scanner (System.in);	
 				System.out.println("Which square would you like to hit?");
 				String attack = userInput1.nextLine();
-				int row = convertRow(attack, p);
+				int row = convertAttackRow(attack, p, p2);
 				int column = Integer.parseInt(attack.substring(1)) - 1;
 				if (p2.getPlayerShipBoard()[row][column].equals("  "))
 					{
 						System.out.println("Miss!");
-						p2.getPlayerShipBoard()[row][column] = "Mi";
-						p.getPlayerHitMissBoard()[row][column] ="Mi";
+						p2.getPlayerShipBoard()[row][column] = "Ms";
+						p.getPlayerHitMissBoard()[row][column] ="Ms";
 					}
 				
-				else if (p2.getPlayerShipBoard()[row][column].equals("Mi") || p2.getPlayerShipBoard()[row][column].equals("Hi"))
+				else if (p2.getPlayerShipBoard()[row][column].equals("Ms") || p2.getPlayerShipBoard()[row][column].equals("Hi"))
 					{
 						System.out.println("You've already hit this spot.");
 						pAttack(p,p2);
@@ -565,6 +649,13 @@ public class BattleShip
 						System.out.println(q + 1 +") " +p.getAttacks().get(q).getName() + " - Special Attack : " +p.getAttacks().get(q).getAttackName());
 					}
 					int shipans = userInput2.nextInt()-1;
+					if (shipans > p.getAttacks().size()-1)
+						{
+							System.out.println("That's not valid, cheater.");
+							p.getAttacks().clear();
+							pAttack(p,p2);
+							return;
+						}
 					p.getAttacks().get(shipans).getMyAttacks().doSpecial(p,p2);
 					for (int m = 0; m < p.getShips().size(); m++)
 					{
@@ -601,8 +692,8 @@ public class BattleShip
 			catch (InputMismatchException e)
 			{
 				System.out.println("Sorry, that's invalid!");
-				pAttack(p,p2);
 				p.getAttacks().clear();
+				pAttack(p,p2);
 				return;
 			}
 		
@@ -613,7 +704,7 @@ public class BattleShip
 				{
 					try
 						{
-							TimeUnit.SECONDS.sleep(1);
+							TimeUnit.SECONDS.sleep(5);
 						} catch (InterruptedException e)
 						{
 							
